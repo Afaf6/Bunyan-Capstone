@@ -1,27 +1,36 @@
+import { NavLink } from "react-router-dom";
 import style from "./Sidebar.module.css";
 
-function Sidebar() {
+function Sidebar({ isTyping }) {
 
     const links = [
-        {icon: "fa-chart-line", title:"Status" },
-        {icon: "fa-users", title:"User Management" },
-        {icon: "fa-building", title:"Projects Management" },
-        {icon: "fa-building", title:"Developers Management" },
-        {icon: "fa-globe", title:"Website CMS" },
-        {icon: "fa-message", title:"Live Chat" },
+        {icon: "fa-chart-line", title:"Status", path: "/" },
+        {icon: "fa-users", title:"User Management", path: "/users" },
+        {icon: "fa-building", title:"Projects Management", path: "/projects" },
+        {icon: "fa-building", title:"Developers Management", path: "/developers" },
+        {icon: "fa-globe", title:"Website CMS", path: "/website" },
+        {icon: "fa-message", title:"Live Chat", path: "/chat" },
     ];
 
   return (
     <aside className={`${style.sidebar} min-vh-100 py-4`}>
-        <div>
+        <div className= {`${style.title} fw-smiblod px-3 fs-4 mb-2`}>
             Dashboard
         </div>
           <nav>
               {links.map((item, index) => (
-                  <div className="navItem" key={index}>
+                  <NavLink 
+                  to={item.path}
+                  className= {`${style.navItem} d-flex align-items-center gap-3`} key={index}>
                       <i className={`fa-solid ${item.icon}`}></i>
-                      <span className="title">{item.title}</span>
-                  </div>
+                      <span className="fs-5">{item.title}</span>
+
+                      {item.title === "User Management" && isTyping && (
+                        <span 
+                          className={style.dot}
+                        ></span>
+                      )}
+                  </NavLink>
               ))}
 
           </nav>
