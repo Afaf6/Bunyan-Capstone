@@ -1,13 +1,13 @@
 import { NavLink } from "react-router-dom";
 import style from "./Sidebar.module.css";
 
-function Sidebar({ isTyping }) {
+function Sidebar({ typingSection }) {
 
     const links = [
         {icon: "fa-chart-line", title:"Status", path: "/" },
-        {icon: "fa-users", title:"User Management", path: "/users" },
-        {icon: "fa-building", title:"Projects Management", path: "/projects" },
-        {icon: "fa-building", title:"Developers Management", path: "/developers" },
+        {icon: "fa-users", title:"User Management", path: "/users", section: "users" },
+        {icon: "fa-building", title:"Projects Management", path: "/projects", section: "projects" },
+        {icon: "fa-building", title:"Developers Management", path: "/developers", section: "developers" },
         {icon: "fa-globe", title:"Website CMS", path: "/website" },
         {icon: "fa-message", title:"Live Chat", path: "/chat" },
     ];
@@ -25,10 +25,11 @@ function Sidebar({ isTyping }) {
                       <i className={`fa-solid ${item.icon}`}></i>
                       <span className="fs-5">{item.title}</span>
 
-                      {item.title === "User Management" && isTyping && (
+                      {typingSection === item.section && (
                         <span 
                           className={style.dot}
-                        ></span>
+                        >
+                        </span>
                       )}
                   </NavLink>
               ))}
